@@ -6,6 +6,6 @@ import idi.Gorsonpy.userview.QueryView;
 public class TestQuery {
     public static void main(String[] args) {
         QueryView qv = new QueryView();
-        qv.QueryInit();
+        qv.queryInit();
     }
 }

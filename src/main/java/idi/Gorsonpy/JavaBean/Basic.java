@@ -12,6 +12,6 @@ public class Basic {
     private String city_ID;
     @JSONField(name = "所在纬度", ordinal = 3)
     private String lat;//纬度
-    @JSONField(name = "所在精度",ordinal = 4)
+    @JSONField(name = "所在经度",ordinal = 4)
     private String lon;//精度
 }
