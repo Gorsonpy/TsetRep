@@ -2,7 +2,7 @@ package idi.Gorsonpy.utils;
 
 import java.sql.*;
 
-public class ConnectMySQL {
+public class ConnectMysql {
     //一个工具类
     public static Connection getConnection() {
         Connection conn = null;//初始化Connection类
@@ -11,8 +11,9 @@ public class ConnectMySQL {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String username = "root";
             String password = "aaa24331277";//不要拨打哦
-            //“management”位置是连接数据库的名字，最后一项表示采用utf8编码（支持中文）
-            String url = "jdbc:mysql://127.0.0.1:3306/management?characterEncoding=UTF-8";
+            String DatabaseName="cityweather";
+            //最后一项表示采用utf8编码（支持中文）
+            String url = "jdbc:mysql://127.0.0.1:3306/"+DatabaseName+"?characterEncoding=UTF-8";
             conn = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
