@@ -1,4 +1,4 @@
-package testMysql;
+package testFunc;
 
 import idi.Gorsonpy.JavaBean.Basic;
 import idi.Gorsonpy.function.RenewMethods;
