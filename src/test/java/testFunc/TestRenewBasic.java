@@ -8,7 +8,7 @@ import idi.Gorsonpy.utils.ConnectAPI;
 public class TestRenewBasic {
     public static void main(String[] args){
         //测试更新或添加福州的城市基本信息
-        Basic testBasic= ConnectAPI.getBasicInf("福州");
-        RenewMethods.renewBasicInf(testBasic);
+        Basic testBasic= ConnectAPI.getBasicInf("泉州");
+        new RenewMethods().renewBasicInf(testBasic);
     }
 }

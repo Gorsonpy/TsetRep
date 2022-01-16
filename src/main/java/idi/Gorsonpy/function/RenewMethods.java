@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class RenewMethods {
     //更新城市基本信息方法
-    public static void renewBasicInf(Basic basic) {
+    public  void renewBasicInf(Basic basic) {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
