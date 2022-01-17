@@ -98,16 +98,16 @@ public class ConnectAPI {
     }
 
     //从API请求指定城市三日天气信息
-    public static ArrayList<Weather> getWeatherInf(String cityId){
+    public static ArrayList<Weather> getWeatherInf(String cityId) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-        String key="85a6330920bb48a399b5adcb2dc21ba0";
-        String uri="https://devapi.qweather.com/v7/weather/3d";
-        ArrayList<Weather> weatherArrayList=null;
+        String key = "85a6330920bb48a399b5adcb2dc21ba0";
+        String uri = "https://devapi.qweather.com/v7/weather/3d";
+        ArrayList<Weather> weatherArrayList = null;
 
-        StringBuffer params=new StringBuffer();
-        params.append("key="+key);
+        StringBuffer params = new StringBuffer();
+        params.append("key=" + key);
         params.append("&");
-        params.append("location="+cityId);
+        params.append("location=" + cityId);
 
         //创建一个Get请求
         HttpGet httpget = new HttpGet(uri + "?" + params);
@@ -130,7 +130,7 @@ public class ConnectAPI {
             //从响应模型中获取响应实体
             HttpEntity responseEntity = response.getEntity();
             if (responseEntity != null) {
-                weatherArrayList=new ArrayList<>();
+                weatherArrayList = new ArrayList<>();
                 //responseEntity存放的就是JSON形式返回信息
                 String json = EntityUtils.toString(responseEntity);//用toString方法变为String类型
 
@@ -139,7 +139,7 @@ public class ConnectAPI {
 
                 //拿出jsonObject中的location(location是JSONArray类型的)
                 JSONArray jsonArray = jsonObject.getJSONArray("daily");
-                for(int i = 0; i < jsonArray.size(); ++ i){
+                for (int i = 0; i < jsonArray.size(); ++i) {
                     Weather weather = new Weather();
                     weather.setFxDate(jsonArray.getJSONObject(i).getString("fxDate"));
                     weather.setTempMax(jsonArray.getJSONObject(i).getString("tempMax"));

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class RenewView {
 
     //更新城市基本信息的方法
-    public void renewCityBasic(){
+    public void renewCityBasic() {
         Scanner in = new Scanner(System.in);
         System.out.println("----------请输入你要更新信息的城市的名称----------");
         String cityName = in.next();
@@ -20,45 +20,45 @@ public class RenewView {
     }
 
     //更新未来三天天气信息的方法(无参数版本获取用户输入版本，用于更新功能界面使用)
-    public void renewWeather(){
+    public void renewWeather() {
         Scanner in = new Scanner(System.in);
         System.out.println("----------下面转至查询界面,请寻找要更新天气信息的城市编号----------");
         new QueryView().findBasic();//借助查询界面让用户看到城市编号
         System.out.println("----------请输入要更新天气信息的城市id编号----------");
         String cityId = in.next();
         String cityName = new QueryMethods().queryNameByCityId(cityId);
-        System.out.println("----------正在更新"+cityName+"未来三天的天气信息(可能会造成覆盖)----------");
+        System.out.println("----------正在更新" + cityName + "未来三天的天气信息(可能会造成覆盖)----------");
         ArrayList<Weather> weatherArrayList = new ArrayList<>();
         weatherArrayList = ConnectAPI.getWeatherInf(cityId);
-        if(weatherArrayList == null || weatherArrayList.isEmpty()) {
+        if (weatherArrayList == null || weatherArrayList.isEmpty()) {
             System.out.println("----------Error!请检查城市编号是否正确!----------");
-        }else {
-            for(Weather weather:weatherArrayList){
-                new RenewMethods().renewWeatherInf(weather,cityId);
+        } else {
+            for (Weather weather : weatherArrayList) {
+                new RenewMethods().renewWeatherInf(weather, cityId);
             }
         }
     }
 
-    public void renewAll(){
+    public void renewAll() {
         long num = new CountMethods().countAllCityNum();
-        if(num == 0){
+        if (num == 0) {
             System.out.println("----------Error!当前未收录任何城市！----------");
-        }else {
-            System.out.println("----------当前已经收录了"+num+"个城市----------");
+        } else {
+            System.out.println("----------当前已经收录了" + num + "个城市----------");
             System.out.println("----------正在为你更新他们未来三天的天气信息----------");
             ArrayList<String> idArrayList = new QueryMethods().queryAllCityId();
-            for(String cityId:idArrayList)
-            {
+            for (String cityId : idArrayList) {
                 String name = new QueryMethods().queryNameByCityId(cityId);
-                System.out.println("----------正在为你更新"+name+"未来三天的天气信息----------");
+                System.out.println("----------正在为你更新" + name + "未来三天的天气信息----------");
                 ArrayList<Weather> weatherArrayList = new ArrayList<>();
                 weatherArrayList = ConnectAPI.getWeatherInf(cityId);
-                for(Weather weather:weatherArrayList) {
-                    new RenewMethods().renewWeatherInf(weather,cityId);
+                for (Weather weather : weatherArrayList) {
+                    new RenewMethods().renewWeatherInf(weather, cityId);
                 }
             }
         }
     }
+
     public void renewInit() {
         Scanner in = new Scanner(System.in);
         while (true) {
@@ -79,7 +79,7 @@ public class RenewView {
                     System.out.println("----------更新成功！----------");
                     break;
                 }
-                case "3":{
+                case "3": {
                     renewAll();
                     System.out.println("----------更新成功！----------");
                     break;

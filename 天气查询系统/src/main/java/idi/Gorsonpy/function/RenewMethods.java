@@ -2,14 +2,12 @@ package idi.Gorsonpy.function;
 
 import idi.Gorsonpy.JavaBean.Basic;
 import idi.Gorsonpy.JavaBean.Weather;
-import idi.Gorsonpy.utils.ConnectAPI;
 import idi.Gorsonpy.utils.ConnectMysql;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class RenewMethods {
     //更新城市基本信息方法
@@ -48,7 +46,7 @@ public class RenewMethods {
 
 
     //更新未来三天天气信息的方法
-    public void renewWeatherInf(Weather weather,String city_id) {
+    public void renewWeatherInf(Weather weather, String city_id) {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
@@ -56,7 +54,7 @@ public class RenewMethods {
             conn.setAutoCommit(false);
             //天气表更改
             String sql = "insert into weather(fxDate,tempMax,tempMin,textDay,city_second_id) " +
-                    "values(?, ?, ?, ?, ?) "+
+                    "values(?, ?, ?, ?, ?) " +
                     "on duplicate key update fxDate = ?,tempMax = ?,tempMin = ?,textDay = ?";
             ps = conn.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(weather.getFxDate()));
@@ -70,7 +68,7 @@ public class RenewMethods {
             ps.setString(9, weather.getTextDay());
             ps.executeUpdate();
             conn.commit();
-            }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             try {
                 conn.rollback();

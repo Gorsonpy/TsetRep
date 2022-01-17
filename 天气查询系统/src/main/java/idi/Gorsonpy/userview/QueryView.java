@@ -10,29 +10,22 @@ import idi.Gorsonpy.function.QueryMethods;
 import idi.Gorsonpy.function.RenewMethods;
 import idi.Gorsonpy.utils.ConnectAPI;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 //查询功能界面
 public class QueryView {
-    public void findBasic(){
+    public void findBasic() {
         Scanner in = new Scanner(System.in);
         System.out.println("----------请输入要查询城市的名称----------");
         String cityName = in.nextLine();
         long num = new CountMethods().countCityByName(cityName);
         //这里先做一次更新信息,避免用户要查询的那个城市实际存在但是还未收录
-        if(num == 0) {
+        if (num == 0) {
             System.out.println("----------该城市信息尚未收录，正在尝试为你获取该城市信息......----------");
             new RenewMethods().renewBasicInf(ConnectAPI.getBasicInf(cityName));
             num = new CountMethods().countCityByName(cityName);
-            if(num>0)
+            if (num > 0)
                 System.out.println("----------成功找到该城市信息，已经收录----------");
             else
                 System.out.println("----------抱歉，获取失败----------");
@@ -59,17 +52,18 @@ public class QueryView {
                 tag = false;
         }
     }
-    public void findWeather(){
+
+    public void findWeather() {
         Scanner in = new Scanner(System.in);
-        while(true) {
+        while (true) {
             System.out.println("----------***查询天气***----------");
             System.out.println("----------1.按照城市名称查询----------");
             System.out.println("----------2.按照日期查询----------");
             System.out.println("----------0.退出查询天气----------");
             String s;
             s = in.next();
-            switch(s){
-                case "1":{
+            switch (s) {
+                case "1": {
                     System.out.println("----------将为你导入查询城市编号功能......----------");
                     System.out.println("----------请找到你要查询城市的编号----------");
                     findBasic();
@@ -79,27 +73,27 @@ public class QueryView {
                     long num = new CountMethods().countWeatherInfById(city_Id);
 
                     //如果当前还没有该城市的天气信息，就先尝试获取
-                    if(num == 0){
+                    if (num == 0) {
                         System.out.println("----------抱歉，当前暂且还未收录任何关于该城市天气" +
                                 "的信息----------");
                         System.out.println("----------正在尝试为你获取......----------");
                         ArrayList<Weather> weatherArrayList = ConnectAPI.getWeatherInf(city_Id);
-                        for(Weather weather:weatherArrayList) {
+                        for (Weather weather : weatherArrayList) {
                             new RenewMethods().renewWeatherInf(weather, city_Id);
                         }
                         num = new CountMethods().countWeatherInfById(city_Id);
-                        if(num>0){
+                        if (num > 0) {
                             System.out.println("----------成功获取了该城市未来三天天气情况，" +
                                     "已收录----------");
-                        }else{
+                        } else {
                             System.out.println("----------抱歉，获取失败----------");
                         }
                     }
-                    System.out.println("----------"+cityName+"已经储存有的天气信息有" + num + "天----------");
+                    System.out.println("----------" + cityName + "已经储存有的天气信息有" + num + "天----------");
                     System.out.println("----------请输入一页要查看的信息数量----------");
                     long pageSize = in.nextLong();
                     long total = (int) Math.ceil((double) num / pageSize);//总页数
-                    System.out.println("----------"+cityName+"共有" + total + "页天气信息----------");
+                    System.out.println("----------" + cityName + "共有" + total + "页天气信息----------");
                     boolean tag = true;
                     while (tag) {
                         System.out.println("----------请输入你要查看第几页(从1开始,优先显示最近日期)?----------");
@@ -119,9 +113,9 @@ public class QueryView {
                     }
                     break;
                 }
-                case "2":{
+                case "2": {
                     System.out.println("----------你要查询哪天的天气(yyyy-MM-dd)?----------");
-                    String strDate=in.next();
+                    String strDate = in.next();
                     long num = new CountMethods().countWeatherInfByDate(strDate);
                     System.out.println("----------该天已经储存有" + num + "个城市的天气信息----------");
                     System.out.println("----------请输入一页要查看的信息数量----------");
@@ -133,7 +127,7 @@ public class QueryView {
                         System.out.println("----------请输入你要查看第几页(从1开始,优先显示最近日期)?----------");
                         long pageIndex = in.nextLong();
                         ArrayList<Weather_With_Name> weatherArrayList = new QueryMethods().
-                                queryWeatherByDate(pageSize, pageIndex,strDate);
+                                queryWeatherByDate(pageSize, pageIndex, strDate);
                         System.out.println("----------当前第" + pageIndex + "/" + total + "页----------");
                         System.out.println("----------------------------------------");
                         for (Weather_With_Name weather : weatherArrayList) {
@@ -147,10 +141,10 @@ public class QueryView {
                     }
                     break;
                 }
-                case "0":{
+                case "0": {
                     return;
                 }
-                default:{
+                default: {
                     System.out.println("----------非法输入!----------");
                 }
             }

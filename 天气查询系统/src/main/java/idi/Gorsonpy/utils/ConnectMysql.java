@@ -11,9 +11,9 @@ public class ConnectMysql {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String username = "root";
             String password = "aaa24331277";//不要拨打哦
-            String DatabaseName="cityweather";
+            String DatabaseName = "cityweather";
             //最后一项表示采用utf8编码（支持中文）
-            String url = "jdbc:mysql://127.0.0.1:3306/"+DatabaseName+"?characterEncoding=UTF-8";
+            String url = "jdbc:mysql://127.0.0.1:3306/" + DatabaseName + "?characterEncoding=UTF-8";
             conn = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

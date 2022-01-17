@@ -7,11 +7,10 @@ import java.util.ArrayList;
 
 //测试获取三天城市天气信息
 public class TestGetWeatherInf {
-    public static  void main(String[] args){
+    public static void main(String[] args) {
         //福州id为101230101
         ArrayList<Weather> weatherArrayList = ConnectAPI.getWeatherInf("101230101");
-        for(Weather weather:weatherArrayList)
-        {
+        for (Weather weather : weatherArrayList) {
             System.out.println(weather);
         }
     }

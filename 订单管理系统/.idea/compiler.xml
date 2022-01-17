@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="TsetRep" />
         <module name="SystemOfOrder" />
+        <module name="订单管理系统" />
       </profile>
     </annotationProcessing>
   </component>
