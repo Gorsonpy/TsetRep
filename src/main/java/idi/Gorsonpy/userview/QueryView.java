@@ -123,7 +123,7 @@ public class QueryView {
                     System.out.println("----------你要查询哪天的天气(yyyy-MM-dd)?----------");
                     String strDate=in.next();
                     long num = new CountMethods().countWeatherInfByDate(strDate);
-                    System.out.println("----------已经储存有的天气信息有" + num + "天----------");
+                    System.out.println("----------该天已经储存有" + num + "个城市的天气信息----------");
                     System.out.println("----------请输入一页要查看的信息数量----------");
                     long pageSize = in.nextLong();
                     long total = (int) Math.ceil((double) num / pageSize);//总页数
