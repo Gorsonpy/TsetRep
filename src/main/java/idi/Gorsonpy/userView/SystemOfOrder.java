@@ -6,7 +6,7 @@ import idi.Gorsonpy.function.Func.Sign_LoginFunc;
 import java.util.Scanner;
 
 public class SystemOfOrder {
-    public static void main(String[] args) {
+    public void unit() {
         Scanner in = new Scanner(System.in);
         Sign_LoginFunc uf = new Sign_LoginFunc();
         User aUser;
